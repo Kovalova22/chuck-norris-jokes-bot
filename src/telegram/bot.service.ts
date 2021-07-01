@@ -20,6 +20,7 @@ export class BotService implements OnModuleInit {
         `Hello ${msg.from.first_name}!\nHere you can find Chuck Norris jokes! \nTo get a random joke please press random. \nIf you are interested in categories you can find list of them. \nAnd you are also free to see the last ten jokes you have laughed at!`,
         {
           reply_markup: {
+            one_time_keyboard: true,
             inline_keyboard: [
               [
                 {
@@ -49,6 +50,34 @@ export class BotService implements OnModuleInit {
         bot.sendMessage(
           message.chat.id,
           `Here is your random joke:\n"${joke}"`,
+        );
+      }
+
+      if (callbackQuery.data === 'categories') {
+        const categoriesArray = await this.jokesService.getCategories();
+        bot.sendMessage(
+          message.chat.id,
+          `Please, choose the joke category: \n`,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: `${categoriesArray[0]}`,
+                    callback_data: `${categoriesArray[0]}`,
+                  },
+                  {
+                    text: `${categoriesArray[1]}`,
+                    callback_data: `${categoriesArray[1]}`,
+                  },
+                  {
+                    text: `${categoriesArray[2]}`,
+                    callback_data: `${categoriesArray[2]}`,
+                  },
+                ],
+              ],
+            },
+          },
         );
       }
     });

@@ -12,4 +12,12 @@ export class JokesService {
     }
     return randomJoke.data.value;
   }
+
+  async getCategories() {
+    const categories = await axios.get(`${URL}categories`);
+    if (!categories) {
+      throw new NotFoundException();
+    }
+    return categories.data;
+  }
 }
