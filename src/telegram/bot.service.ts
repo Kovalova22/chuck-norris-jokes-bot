@@ -46,7 +46,10 @@ export class BotService implements OnModuleInit {
 
       if (callbackQuery.data === 'random') {
         const joke = await this.jokesService.getRandomJoke();
-        bot.sendMessage(message.chat.id, joke);
+        bot.sendMessage(
+          message.chat.id,
+          `Here is your random joke:\n "${joke}"`,
+        );
       }
     });
   }
