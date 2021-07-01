@@ -1,12 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
+import { BotService } from './telegram/bot.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly botService: BotService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getHello(@Res() res) {
+    this.botService.botMessage();
+    res.status(HttpStatus.OK).send('Bot service started');
   }
 }
