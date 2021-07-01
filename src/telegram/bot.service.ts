@@ -8,10 +8,10 @@ const bot = new TelegramBot(token, { polling: true });
 @Injectable()
 export class BotService implements OnModuleInit {
   onModuleInit() {
-    this.botMessage();
+    this.botGreeting();
   }
 
-  botMessage() {
+  botGreeting() {
     bot.onText(/\/start/, (msg) => {
       console.log(msg.from.id, msg);
       bot.sendMessage(
