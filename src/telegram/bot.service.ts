@@ -48,7 +48,7 @@ export class BotService implements OnModuleInit {
         const joke = await this.jokesService.getRandomJoke();
         bot.sendMessage(
           message.chat.id,
-          `Here is your random joke:\n "${joke}"`,
+          `Here is your random joke:\n"${joke}"`,
         );
       }
     });
