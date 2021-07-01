@@ -50,14 +50,4 @@ export class BotService implements OnModuleInit {
       }
     });
   }
-
-  // botRandomJoke() {
-  //   bot.on('callback_query', (callbackQuery) => {
-  //     const message = callbackQuery.message;
-
-  //     if (callbackQuery.data) {
-  //       bot.sendMessage(message.chat.id, callbackQuery.data);
-  //     }
-  //   });
-  // }
 }
