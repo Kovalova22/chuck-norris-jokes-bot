@@ -89,6 +89,17 @@ export class BotService implements OnModuleInit {
           );
         });
       }
+
+      if (callbackQuery.data === 'history') {
+        const lastJokes = await this.jokesDBService.getUserJokes(
+          message.chat.id,
+        );
+
+        bot.sendMessage(
+          message.chat.id,
+          `Your Last 10 Jokes are: ${lastJokes}`,
+        );
+      }
     });
   }
 }

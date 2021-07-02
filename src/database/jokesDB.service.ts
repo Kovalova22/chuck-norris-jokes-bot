@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { getMongoManager } from 'typeorm';
+import { getMongoManager, getMongoRepository } from 'typeorm';
 import { Jokes } from './jokesDB.entity';
 
 @Injectable()
@@ -11,5 +11,16 @@ export class JokesDBService {
 
     const manager = getMongoManager();
     return await manager.save(jokes);
+  }
+
+  async getUserJokes(chatId: number) {
+    const jokesRepository = getMongoRepository(Jokes);
+    const jokes = await jokesRepository.find({
+      where: {
+        chatId: { $eq: chatId },
+      },
+    });
+    console.log(jokes);
+    return jokes.map((items) => items.joke);
   }
 }
