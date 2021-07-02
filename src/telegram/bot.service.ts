@@ -82,6 +82,7 @@ export class BotService implements OnModuleInit {
           const joke = await this.jokesService.getOneCategory(
             callbackQuery.data,
           );
+          await this.jokesDBService.saveJoke(message.chat.id, joke);
           bot.sendMessage(
             message.chat.id,
             `Here is your random joke for the category "${callbackQuery.data}":\n"${joke}"`,
