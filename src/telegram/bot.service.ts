@@ -65,7 +65,6 @@ export class BotService implements OnModuleInit {
             ]),
           },
         };
-        console.log(options.reply_markup.inline_keyboard);
         bot.sendMessage(
           message.chat.id,
           `Please, choose the joke category: \n`,
