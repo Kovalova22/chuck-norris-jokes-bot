@@ -60,11 +60,12 @@ export class BotService implements OnModuleInit {
             inline_keyboard: categoriesArray.map((item: string) => [
               {
                 text: item,
-                callback_data: String(item),
+                callback_data: item,
               },
             ]),
           },
         };
+        console.log(options.reply_markup.inline_keyboard);
         bot.sendMessage(
           message.chat.id,
           `Please, choose the joke category: \n`,
