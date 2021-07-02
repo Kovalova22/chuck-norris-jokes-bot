@@ -17,6 +17,7 @@ export class JokesDBService {
     const jokesRepository = getMongoRepository(Jokes);
     const jokesArray = await jokesRepository.find({
       take: 10,
+      order: { createdAt: 'DESC' },
       where: {
         chatId: { $eq: chatId },
       },

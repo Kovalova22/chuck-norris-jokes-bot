@@ -10,4 +10,7 @@ export class Jokes {
 
   @Column()
   joke: string;
+
+  @Column()
+  createdAt: Date;
 }
