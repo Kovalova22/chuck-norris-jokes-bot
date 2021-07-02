@@ -1,5 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import * as TelegramBot from 'node-telegram-bot-api';
+import { JokesDBService } from 'src/database/jokesDB.service';
 import { JokesService } from 'src/jokesAPI/jokesAPI.service';
 
 const token = process.env.TELEGRAM_API_TOKEN;
@@ -8,7 +9,10 @@ const bot = new TelegramBot(token, { polling: true });
 
 @Injectable()
 export class BotService implements OnModuleInit {
-  constructor(private readonly jokesService: JokesService) {}
+  constructor(
+    private readonly jokesService: JokesService,
+    private readonly jokesDBService: JokesDBService,
+  ) {}
   onModuleInit() {
     this.botGreeting();
   }
@@ -47,6 +51,7 @@ export class BotService implements OnModuleInit {
 
       if (callbackQuery.data === 'random') {
         const joke = await this.jokesService.getRandomJoke();
+        await this.jokesDBService.saveJoke(message.chat.id, joke);
         bot.sendMessage(
           message.chat.id,
           `Here is your random joke:\n"${joke}"`,

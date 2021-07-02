@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { JokesDBModule } from './database/jokesDB.module';
+import { JokesDBService } from './database/jokesDB.service';
 import { JokesService } from './jokesAPI/jokesAPI.service';
 import { BotService } from './telegram/bot.service';
 
@@ -13,9 +15,12 @@ import { BotService } from './telegram/bot.service';
       port: parseInt(process.env.DATABASE_PORT),
       database: process.env.DATABASE_NAME,
       useUnifiedTopology: true,
+      autoLoadEntities: true,
+      synchronize: true,
     }),
+    JokesDBModule,
   ],
   controllers: [AppController],
-  providers: [AppService, BotService, JokesService],
+  providers: [AppService, BotService, JokesService, JokesDBService],
 })
 export class AppModule {}
