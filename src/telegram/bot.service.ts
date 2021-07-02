@@ -55,29 +55,20 @@ export class BotService implements OnModuleInit {
 
       if (callbackQuery.data === 'categories') {
         const categoriesArray = await this.jokesService.getCategories();
+        const options = {
+          reply_markup: {
+            inline_keyboard: categoriesArray.map((item: string) => [
+              {
+                text: item,
+                callback_data: String(item),
+              },
+            ]),
+          },
+        };
         bot.sendMessage(
           message.chat.id,
           `Please, choose the joke category: \n`,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: `${categoriesArray[0]}`,
-                    callback_data: `${categoriesArray[0]}`,
-                  },
-                  {
-                    text: `${categoriesArray[1]}`,
-                    callback_data: `${categoriesArray[1]}`,
-                  },
-                  {
-                    text: `${categoriesArray[2]}`,
-                    callback_data: `${categoriesArray[2]}`,
-                  },
-                ],
-              ],
-            },
-          },
+          options,
         );
       }
     });
