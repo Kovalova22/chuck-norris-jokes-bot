@@ -79,14 +79,16 @@ export class BotService implements OnModuleInit {
         bot.on('callback_query', async (callbackQuery) => {
           const message = callbackQuery.message;
 
-          const joke = await this.jokesService.getOneCategory(
-            callbackQuery.data,
-          );
-          await this.jokesDBService.saveJoke(message.chat.id, joke);
-          bot.sendMessage(
-            message.chat.id,
-            `Here is your random joke for the category "${callbackQuery.data}":\n"${joke}"`,
-          );
+          if (callbackQuery.data !== 'get_history') {
+            const joke = await this.jokesService.getOneCategory(
+              callbackQuery.data,
+            );
+            await this.jokesDBService.saveJoke(message.chat.id, joke);
+            bot.sendMessage(
+              message.chat.id,
+              `Here is your random joke for the category "${callbackQuery.data}":\n"${joke}"`,
+            );
+          }
         });
       }
 
