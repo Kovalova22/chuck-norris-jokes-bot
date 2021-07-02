@@ -24,32 +24,39 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+It is a very simple telegram bot which shows user jokes from Chuck Norris. You can also choose category and see the last 10 previously received jokes. The application was written using Nestjs and MongoDB with TypeOrm.
 
-## Installation
+## Running the app locally
 
-```bash
-$ npm install
+To edit this project locally you can fork this repository and set it up. First of all you need to install dependencies:
+
+```
+$ yarn install
 ```
 
-## Running the app
+After making any changes you can run the app: 
 
-```bash
-# development
-$ npm run start
+```
+$ yarn start
+```
 
-# watch mode
-$ npm run start:dev
+or in watch mode: 
+```
+$ yarn start:dev
+```
 
-# production mode
-$ npm run start:prod
+To run linter in order to check the project, firstly install eslint globally on your machine and then run the lint command:
+
+```
+$ sudo yarn global add eslint
+$ yarn lint
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn test
 
 # e2e tests
 $ npm run test:e2e
