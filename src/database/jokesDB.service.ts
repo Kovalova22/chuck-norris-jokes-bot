@@ -16,6 +16,7 @@ export class JokesDBService {
   async getUserJokes(chatId: number) {
     const jokesRepository = getMongoRepository(Jokes);
     const jokes = await jokesRepository.find({
+      take: 10,
       where: {
         chatId: { $eq: chatId },
       },

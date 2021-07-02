@@ -37,7 +37,7 @@ export class BotService implements OnModuleInit {
                 },
                 {
                   text: 'History',
-                  callback_data: 'history',
+                  callback_data: 'get_history',
                 },
               ],
             ],
@@ -90,7 +90,7 @@ export class BotService implements OnModuleInit {
         });
       }
 
-      if (callbackQuery.data === 'history') {
+      if (callbackQuery.data === 'get_history') {
         const lastJokes = await this.jokesDBService.getUserJokes(
           message.chat.id,
         );
