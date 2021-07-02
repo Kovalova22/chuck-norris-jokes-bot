@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { BotService } from './telegram/bot.service';
+import { BotService } from './bot.service';
 
 @Controller()
-export class AppController {
+export class BotController {
   constructor(private readonly botService: BotService) {}
 
   @Get()
-  botGreeting() {
-    this.botService.botGreeting();
+  botCommunicate() {
+    this.botService.botCommunicate();
   }
 }

@@ -14,10 +14,10 @@ export class BotService implements OnModuleInit {
     private readonly jokesDBService: JokesDBService,
   ) {}
   onModuleInit() {
-    this.botGreeting();
+    this.botCommunicate();
   }
 
-  botGreeting() {
+  botCommunicate() {
     bot.onText(/\/start/, (msg) => {
       bot.sendMessage(
         msg.from.id,

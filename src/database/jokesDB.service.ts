@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { getMongoManager, getMongoRepository } from 'typeorm';
 import { Jokes } from './jokesDB.entity';
 
@@ -13,7 +13,7 @@ export class JokesDBService {
     return await manager.save(jokes);
   }
 
-  async getUserJokes(chatId: number) {
+  async getUserJokes(chatId: number): Promise<Jokes[]> {
     const jokesRepository = getMongoRepository(Jokes);
     const jokesArray = await jokesRepository.find({
       take: 10,
@@ -21,12 +21,15 @@ export class JokesDBService {
         chatId: { $eq: chatId },
       },
     });
-    const jokes = returnJokes(jokesArray);
+    if (jokesArray.length === 0) {
+      throw new NotFoundException('You have not any jokes in history yet!');
+    }
+    const jokes = refactorArray(jokesArray);
     return jokes;
   }
 }
 
-function returnJokes(jokesArr: any) {
+function refactorArray(jokesArr: any) {
   const jokes = jokesArr.map((items) => items.joke);
   return jokes.join('\n\n');
 }

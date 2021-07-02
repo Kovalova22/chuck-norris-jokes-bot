@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { JokesDBModule } from './database/jokesDB.module';
 import { JokesDBService } from './database/jokesDB.service';
 import { JokesService } from './jokesAPI/jokesAPI.service';
+import { BotController } from './telegram/bot.controller';
 import { BotService } from './telegram/bot.service';
 
 @Module({
@@ -20,7 +19,7 @@ import { BotService } from './telegram/bot.service';
     }),
     JokesDBModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, BotService, JokesService, JokesDBService],
+  controllers: [BotController],
+  providers: [BotService, JokesService, JokesDBService],
 })
 export class AppModule {}
