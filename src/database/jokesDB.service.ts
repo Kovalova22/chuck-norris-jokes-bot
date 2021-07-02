@@ -15,13 +15,18 @@ export class JokesDBService {
 
   async getUserJokes(chatId: number) {
     const jokesRepository = getMongoRepository(Jokes);
-    const jokes = await jokesRepository.find({
+    const jokesArray = await jokesRepository.find({
       take: 10,
       where: {
         chatId: { $eq: chatId },
       },
     });
-    console.log(jokes);
-    return jokes.map((items) => items.joke);
+    const jokes = returnJokes(jokesArray);
+    return jokes;
   }
+}
+
+function returnJokes(jokesArr: any) {
+  const jokes = jokesArr.map((items) => items.joke);
+  return jokes.join('\n\n');
 }

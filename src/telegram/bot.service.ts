@@ -97,7 +97,7 @@ export class BotService implements OnModuleInit {
 
         bot.sendMessage(
           message.chat.id,
-          `Your Last 10 Jokes are: ${lastJokes}`,
+          `Your Last 10 Jokes are:\n\n${lastJokes}`,
         );
       }
     });
